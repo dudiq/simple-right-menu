@@ -1,0 +1,56 @@
+<html>
+<head>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="simple-right-menu.js"></script>
+    <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+    <link type="text/css" href="simple-right-menu.css" rel="stylesheet"/>
+    <style>
+        html, body, table
+        {
+            font-size: 12px;
+            font-family: Tahoma, Verdana,"Lucinda Console","Arial","Helvetica","sans-serif";
+        }
+        .divTree{
+            width:300px; height: 300px;
+            border: 1px solid gray;
+            display: block;
+            margin-top: 10px;
+        }
+        .btn{
+            cursor: pointer;
+            -moz-user-select:none; -khtml-user-select:none; -webkit-user-select:none; user-select: none;
+            padding: 4px;
+            border: 1px solid gray;
+            border-radius: 4px;
+            width: 100px;
+        }
+        span.btn:hover{
+            background-color: silver;
+        }
+    </style>
+</head>
+<body>
+<div id="menu" style="position: absolute; top:880px;">menu here</div>
+<script>
+    $().ready(function(){
+        var rMenu = new jqSimpleRightMenu($("#menu"), [{title: "test", icon: "copy.png", nodes:[{title:"test", id: "game"}, {title: "test323"}, {title: "childs", nodes: [{title: "1"}, {title:"2"}]}]}, {separator: true},{title:"test df asdf asf ad2"}, {title:"node3"}]);
+        $(rMenu).bind(jqSimpleRightMenu.onBeforeShow, function(){
+            console.log("onBeforeShow");
+        })
+        $("#menu").mousedown(function(ev){
+	        //console.dir({which: ev.which, button: ev.button});
+	    });
+        $("#add").click(function(){
+            var newId = rMenu.addNode("game", {title:"new node", enable: false});
+            console.log("newId:" + newId);
+        });
+        $("#add").dblclick(function(){
+            rMenu.addNode("game", {title:"new node0"}, 0);
+        });
+    });
+
+</script>
+<div id="add">add node</div>
+</body>
+</html>

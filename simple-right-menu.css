@@ -1,0 +1,127 @@
+/**
+* jQuery Simple Right Menu
+* @version: 0.1 - 2011.07.28
+* @author: dudiq
+* @licence: MIT http://www.opensource.org/licenses/mit-license.php
+**/
+.simple-right-menu, .simple-right-menu-container{
+    -moz-user-select:none; -khtml-user-select:none; -webkit-user-select:none; user-select: none;
+    display: inline-block;
+    position: absolute;
+    border: 1px solid #9EBEFF;
+    border-spacing: 0px;
+    background-color: #efeffc;
+    border-collapse: separate;
+}
+
+.simple-right-menu-container{
+
+}
+
+.simple-right-menu-item{
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.simple-right-menu-item-disable{
+    opacity: .5; filter:Alpha(Opacity=50);
+}
+
+.simple-right-menu-item-separator span{
+    height: 0px;
+}
+
+tr.simple-right-menu-item:hover{
+    background-color: #fcd6a1;
+}
+tr.simple-right-menu-item > td{  
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+}
+tr.simple-right-menu-item:hover > td{
+    border-top: 1px solid #fca224;
+    border-bottom: 1px solid #fca224;
+}
+
+tr.simple-right-menu-item-separator td{
+    padding: 1px 0 0 0;
+}
+tr.simple-right-menu-item-separator, tr.simple-right-menu-item-separator:hover{
+    height: 0px;
+    background: #adadfa;
+}
+
+.simple-right-menu-item-selected{
+
+}
+
+.simple-right-menu-expand{
+    float: right;
+    width: 12px;
+}
+
+.simple-right-menu-has-child{
+    background: transparent url("images/simple-right-menu/right.png");
+}
+
+.simple-right-menu-item-icon{
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    background-color: transparent;
+    background-position: center center;
+    background-repeat: no-repeat;
+    padding: 2px;
+}
+
+.simple-right-menu-folder{
+
+}
+
+.simple-right-menu-child{
+
+}
+
+.simple-right-menu-title{
+    margin-left: 4px;
+}
+
+.simple-right-menu-icon-blank{
+    background-image: url("images/simple-right-menu/icons/blank.png");
+}
+.simple-right-menu-icon-clone{
+    background-image: url("images/simple-right-menu/icons/clone.png");
+}
+.simple-right-menu-icon-createApp{
+    background-image: url("images/simple-right-menu/icons/createApp.png");
+}
+.simple-right-menu-icon-createFolder{
+    background-image: url("images/simple-right-menu/icons/createFolder.png");
+}
+.simple-right-menu-icon-cut{
+    background-image: url("images/simple-right-menu/icons/cut.png");
+}
+.simple-right-menu-icon-delete{
+    background-image: url("images/simple-right-menu/icons/delete.png");
+}
+.simple-right-menu-icon-design{
+    background-image: url("images/simple-right-menu/icons/design.png");
+}
+.simple-right-menu-icon-live{
+    background-image: url("images/simple-right-menu/icons/live.png");
+}
+.simple-right-menu-icon-lock{
+    background-image: url("images/simple-right-menu/icons/lock.png");
+}
+.simple-right-menu-icon-moveback{
+    background-image: url("images/simple-right-menu/icons/moveback.png");
+}
+.simple-right-menu-icon-movefront{
+    background-image: url("images/simple-right-menu/icons/movefront.png");
+}
+.simple-right-menu-icon-paste{
+    background-image: url("images/simple-right-menu/icons/paste.png");
+}
+.simple-right-menu-icon-save{
+    background-image: url("images/simple-right-menu/icons/save.png");
+}

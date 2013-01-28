@@ -13,6 +13,13 @@
         $(globalObj).trigger("close");
     });
 
+    var safeTextBuff = $("<div/>");
+
+    function getEscapedText(text){
+        text = text || "";
+        return safeTextBuff.text(text).html();
+    }
+
 function jqSimpleRightMenu(div, data, opt) {
     var rMenu = {
         _data: null,
@@ -120,11 +127,12 @@ function jqSimpleRightMenu(div, data, opt) {
                     var isEnable = (node.enable === false) ? "simple-right-menu-item-disable " : "",
                         isFolder = (node.nodes != undefined),
                         hasChild = (isFolder && node.nodes.length > 0),
+                        title = (node.safeTitle !== false) ? getEscapedText(node.title || "")  : (node.title || ""),
                         iconStyle = (node.icon) ? "simple-right-menu-icon-" + node.icon : "",
                         itemDiv = (node.separator) ? $("<tr class='simple-right-menu-item-separator'><td colspan='3'></td></tr>") :
                                 $("<tr class='"+ isEnable +"simple-right-menu-item "+((isFolder) ? "simple-right-menu-folder" : "simple-right-menu-child") +"'>" +
                                 "<td>" + "<span class='simple-right-menu-item-icon "+ iconStyle +"'>&nbsp;</span>" + "</td>"+
-                                "<td><span class='simple-right-menu-title'>" + (node.title || "") + "</span></td>"+
+                                "<td><span class='simple-right-menu-title'>" + title + "</span></td>"+
                                 "<td><span class='simple-right-menu-expand "+((hasChild) ? "simple-right-menu-has-child" : "" )+ "'>&nbsp;</span></td></tr>");
                     ul = (isFolder) ? self._getNewContainerEl(node.id) : undefined;
                     (ul) ? ul.hide() : null;

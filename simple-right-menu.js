@@ -6,6 +6,13 @@
 **/
 (function(window, console) {
 
+    var $doc = $(document),
+        globalObj = {};
+
+    $doc.bind("click", function(){
+        $(globalObj).trigger("close");
+    });
+
 function jqSimpleRightMenu(div, data, opt) {
     var rMenu = {
         _data: null,
@@ -153,7 +160,7 @@ function jqSimpleRightMenu(div, data, opt) {
             return $("<table class='simple-right-menu-container' style='display:none;'>").data("id", id);
         },
         _generateUniqueId: function(map){
-            var getGuid = function(){
+            function getGuid(){
                 var quidStr = "abcdefghijklmnopqrstuvwxyz0123456789-", quid = "w";
                 for (var i = 0, l = quidStr.length; i < l; i++) {
                     var pos = parseInt(l * Math.random());
@@ -372,6 +379,13 @@ function jqSimpleRightMenu(div, data, opt) {
                 ev.stopPropagation();
                 ev.preventDefault();
             });
+
+
+            $(globalObj).bind("close", {self: this}, this._onGlobalClose);
+        },
+        _onGlobalClose: function(ev){
+            var self = ev.data.self;
+            self.hide();
         },
         _onSelect: function(el, callEvent){
             var id = el.data("id"),
@@ -460,9 +474,10 @@ function jqSimpleRightMenu(div, data, opt) {
             var self = this,
                 div = this._div,
                 wHeight = $(window).height();
-            if ($(document.body).children("#" + this._id).length == 0){
-                $(document.body).append(div);
-            }
+
+            div.detach();
+            $(document.body).append(div);
+
             pos = pos || this._objectEnv['pos'];
             pos = (pos == undefined) ? {left: 0, top: 0} : pos;
             div.css({left: pos.left - 2, top: pos.top - 2}).fadeIn(100);
@@ -508,6 +523,7 @@ function jqSimpleRightMenu(div, data, opt) {
             }
             this._nodesMap = undefined; this._data = undefined; this._objectEnv = undefined; this._div = undefined;
             $(this).unbind();
+            $(globalObj).unbind("close", this._onGlobalClose);
         }
     };
     rMenu._init(div, data, opt);

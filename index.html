@@ -35,11 +35,14 @@
 <div id="menu2" style="position: absolute; top:400px;">menu here2</div>
 <script>
     $().ready(function(){
-        var rMenu = new jqSimpleRightMenu($("#menu"), [{title: "<script>alert(1);", icon: "copy.png", nodes:[{title:"test", id: "game"}, {title: "test323"}, {title: "childs", nodes: [{title: "1"}, {title:"2"}]}]}, {separator: true},{title:"test df asdf asf ad2"}, {title:"node3"}]);
+        var rMenu = new jqSimpleRightMenu($("#menu"), [{title: "<script>alert(1);", visible: false, icon: "copy.png",
+            nodes:[{title:"test", id: "game"}, {title: "test323"}, {title: "childs", nodes: [{title: "1"}, {title:"2"}]}]}, {separator: true, visible: false,}
+            ,{visible: false, title:"test df asdf asf ad2"}, {visible: false, title:"node3"}]);
         var rMenu2 = new jqSimpleRightMenu($("#menu2"), [{title: "test", icon: "copy.png", nodes:[{title:"test", id: "game"}, {title: "test323"}, {title: "childs", nodes: [{title: "1"}, {title:"2"}]}]}, {separator: true},{title:"test df asdf asf ad2"}, {title:"node3"}]);
         $(rMenu).bind(jqSimpleRightMenu.onBeforeShow, function(){
             console.log("onBeforeShow");
         })
+        $(rMenu).bind()
         $("#menu").mousedown(function(ev){
 	        //console.dir({which: ev.which, button: ev.button});
 	    });

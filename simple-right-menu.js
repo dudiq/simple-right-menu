@@ -41,6 +41,10 @@ function jqSimpleRightMenu(div, data, opt) {
         },
         id: function(){return this._id;},
         setData: function(data) {
+            data = (jQuery.extend(true, {}, {val: data})).val;
+            this._setData(data);
+        },
+        _setData: function(data){
             if (data != undefined) {
                 this.clear();
                 var sendData = {id: this._generateUniqueId(), nodes: data};
@@ -136,6 +140,7 @@ function jqSimpleRightMenu(div, data, opt) {
                                 "<td><span class='simple-right-menu-expand "+((hasChild) ? "simple-right-menu-has-child" : "" )+ "'>&nbsp;</span></td></tr>");
                     ul = (isFolder) ? self._getNewContainerEl(node.id) : undefined;
                     (ul) ? ul.hide() : null;
+                    (node.visible === false) && (itemDiv.hide());
                     itemDiv.data({
                         "id": node.id
                     });
@@ -447,11 +452,17 @@ function jqSimpleRightMenu(div, data, opt) {
         },
         showNode: function(id){
             var map = this._getNodesMap(id);
-            (map) ? map["divs"].show() : null;
+            if (map) {
+                map["divs"].show();
+                map.node.visible = true;
+            }
         },
         hideNode: function(id){
             var map = this._getNodesMap(id);
-            (map) ? map["divs"].hide() : null;
+            if (map) {
+                map["divs"].hide();
+                map.node.visible = false;
+            }
         },
         enableNode: function(id){
             var map = this._getNodesMap(id);
@@ -470,10 +481,10 @@ function jqSimpleRightMenu(div, data, opt) {
         onContextMenu: function(ev){
             var triggerEvent = new jQuery.Event(jqSimpleRightMenu.onBeforeShow),
                 self = this;
+            $(this).trigger(triggerEvent, [ev]);
             if (ev && typeof ev == "object" && ev['clientX'] && ev['clientY']){
                 this._objectEnv['pos'] = {left: ev.clientX - 2, top:ev.clientY - 2};
             }
-            $(this).trigger(triggerEvent, [ev]);
             if (!triggerEvent.isPropagationStopped()){
                 this.show();
             }
@@ -481,26 +492,38 @@ function jqSimpleRightMenu(div, data, opt) {
         show: function(pos){
             var self = this,
                 div = this._div,
+                data = this._data,
+                visNodes = 0,
                 wHeight = $(window).height();
 
-            div.detach();
-            $(document.body).append(div);
+            for (var i = 0, l = data.length; i < l; i++){
+                var map = this._getNodesMap(data[i].id);
+                if (map.node.visible !== false){
+                    visNodes++;
+                }
+            }
 
-            pos = pos || this._objectEnv['pos'];
-            pos = (pos == undefined) ? {left: 0, top: 0} : pos;
-            div.css({left: pos.left - 2, top: pos.top - 2}).fadeIn(100);
-            this._dropCloseTimeout();
-            this._objectEnv["timeIdLeave"] = setTimeout(function(){
-                self._onMenuClose();
-            }, 3000);
-            div.show();
-            self._fixPosition(wHeight, div, true);
+            div.detach();
+            if (visNodes > 0){
+                //if no visible root nodes, drop showing right menu
+                $(document.body).append(div);
+
+                pos = pos || this._objectEnv['pos'];
+                pos = (pos == undefined) ? {left: 0, top: 0} : pos;
+                div.css({left: pos.left - 2, top: pos.top - 2}).fadeIn(100);
+                this._dropCloseTimeout();
+                this._objectEnv["timeIdLeave"] = setTimeout(function(){
+                    self._onMenuClose();
+                }, 3000);
+                div.show();
+                self._fixPosition(wHeight, div, true);
+            }
         },
         hide: function(){
             this._onMenuClose();
         },
         reDraw: function(){
-            this.setData(this.getData());
+            this._setData(this._data);
             this._bindEvents();
         },
         base: function(){

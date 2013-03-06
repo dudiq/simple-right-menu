@@ -1,5 +1,7 @@
 /**
 * jQuery Simple Right Menu
+* https://github.com/dudiq/simple-right-menu
+*
 * @version: 0.1 - 2011.07.28
 * @author: dudiq
 * @licence: MIT http://www.opensource.org/licenses/mit-license.php

@@ -22,6 +22,22 @@
         return safeTextBuff.text(text).html();
     }
 
+    function setLeaveState(){
+        this._dropCloseTimeout();
+        if (this._opt['leaveInterval'] !== 0){
+            var self = this;
+            var timeInt = this._opt['leaveInterval'] || 3000;
+            var timeId = setTimeout(function(){
+                if (self._div){
+                    //check for immedially destroy, before items are not hidden
+                    self._onMenuClose();
+                }
+            }, timeInt);
+            this._objectEnv["timeIdLeave"] = timeId;
+        }
+    }
+
+
 function jqSimpleRightMenu(div, data, opt) {
     var rMenu = {
         _data: null,
@@ -37,6 +53,7 @@ function jqSimpleRightMenu(div, data, opt) {
             this._div = $("<table class='simple-right-menu' id='"+ this._id +"'>").attr("unselectable", "on");
             this._contextDiv = div;
             this._objectEnv = {};
+            this._opt = opt || {};
             this._dropData();
             this.setData(data);
             this._bindEvents();
@@ -77,6 +94,7 @@ function jqSimpleRightMenu(div, data, opt) {
                 console.error(msg);
         },
         _dropData: function(){
+            this._dropCloseTimeout();
             this._objectEnv = {}; this._nodesMap = {}; this._data = {};
         },
         setItemIcon: function(id, iconUrl){
@@ -95,7 +113,7 @@ function jqSimpleRightMenu(div, data, opt) {
         setItemIconSize: function(size){
             size = (typeof size == "string") ? size : size + "px";
             (this._objectEnv['iconStyle']) ? this._objectEnv['iconStyle'].remove() : null;
-            this._objectEnv['iconStyle'] = $("<style> #"+ this._id +".simple-right-menu-item-icon {width: " + size + "; height: " + size + ";} </style>")
+            this._objectEnv['iconStyle'] = $("<style> #"+ this._id +".simple-right-menu-item-icon {width: " + size + "; height: " + size + ";} </style>");
             this._div.prepend(this._objectEnv['iconStyle']);
         },
         _onMenuClose: function(){
@@ -112,9 +130,7 @@ function jqSimpleRightMenu(div, data, opt) {
             });
         },
         _dropCloseTimeout: function(){
-            if (this._objectEnv["timeIdLeave"] != undefined){
-                clearTimeout(this._objectEnv["timeIdLeave"]);
-            }
+            clearTimeout(this._objectEnv["timeIdLeave"]);
         },
         _addNewNode: function(parentId, data, buff, pos){
             var tmpDiv = $("<div>"); tmpDiv.data("id", parentId);
@@ -323,12 +339,12 @@ function jqSimpleRightMenu(div, data, opt) {
             return el.closest(".simple-right-menu-item");
         },
         _bindEvents: function(){
+            var self = this,
+                div = this._div;
             $(this._contextDiv).unbind("contextmenu." + this._id).bind("contextmenu." + this._id, function(ev){
                 self.onContextMenu(ev);
                 return false;
             });
-            var self = this,
-                div = this._div;
             //bind events to root div. we don't need to bind events to every child
             div.unbind("click dblclick contextmenu mouseover mouseenter mouseleave").bind("click", function(ev){
                 var el = self._getEventElem(ev),
@@ -350,6 +366,7 @@ function jqSimpleRightMenu(div, data, opt) {
                 ev.stopPropagation();
                 ev.preventDefault();
             }).bind("mouseover", function(ev){
+
                 var el = self._getEventElem(ev),
                     parentEl = self._getParentItemElement(el),
                     id = parentEl.data("id");
@@ -382,14 +399,9 @@ function jqSimpleRightMenu(div, data, opt) {
                 ev.preventDefault();
             }).bind("mouseleave", function(){
                 //check for hide menu
-                self._dropCloseTimeout();
-                self._objectEnv["timeIdLeave"] = setTimeout(function(){
-                    if (self._div){
-                        //check for immedially destroy, before items are not hidden
-                        self._onMenuClose();
-                    }
-                }, 1000);
-            }).bind("mouseenter", function(ev){
+                setLeaveState.call(self);
+            })
+            .bind("mouseenter", function(ev){
                 self._dropCloseTimeout();
                 ev.stopPropagation();
                 ev.preventDefault();
@@ -513,10 +525,8 @@ function jqSimpleRightMenu(div, data, opt) {
                 pos = pos || this._objectEnv['pos'];
                 pos = (pos == undefined) ? {left: 0, top: 0} : pos;
                 div.css({left: pos.left - 2, top: pos.top - 2}).fadeIn(100);
-                this._dropCloseTimeout();
-                this._objectEnv["timeIdLeave"] = setTimeout(function(){
-                    self._onMenuClose();
-                }, 3000);
+
+                setLeaveState.call(this);
                 div.show();
                 self._fixPosition(wHeight, div, true);
             }
@@ -557,6 +567,7 @@ function jqSimpleRightMenu(div, data, opt) {
             this._nodesMap = undefined; this._data = undefined; this._objectEnv = undefined; this._div = undefined;
             $(this).unbind();
             $(globalObj).unbind("close", this._onGlobalClose);
+            this._opt = null;
         }
     };
     rMenu._init(div, data, opt);

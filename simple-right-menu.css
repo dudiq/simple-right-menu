@@ -14,6 +14,7 @@
     border-spacing: 0px;
     background-color: #efeffc;
     border-collapse: separate;
+    outline: none;
 }
 
 .simple-right-menu-container{
@@ -64,6 +65,8 @@ tr.simple-right-menu-item-separator, tr.simple-right-menu-item-separator:hover{
 
 .simple-right-menu-has-child{
     background: transparent url("images/simple-right-menu/right.png");
+    background-repeat: no-repeat;
+    background-position-y: center;
 }
 
 .simple-right-menu-item-icon{
@@ -127,3 +130,106 @@ tr.simple-right-menu-item-separator, tr.simple-right-menu-item-separator:hover{
 .simple-right-menu-icon-save{
     background-image: url("images/simple-right-menu/icons/save.png");
 }
+
+
+.simple-right-menu-icon-0 .simple-right-menu-item-icon {width: 0px; height: 0px;}
+.simple-right-menu-icon-1 .simple-right-menu-item-icon {width: 1px; height: 1px;}
+.simple-right-menu-icon-2 .simple-right-menu-item-icon {width: 2px; height: 2px;}
+.simple-right-menu-icon-3 .simple-right-menu-item-icon {width: 3px; height: 3px;}
+.simple-right-menu-icon-4 .simple-right-menu-item-icon {width: 4px; height: 4px;}
+.simple-right-menu-icon-5 .simple-right-menu-item-icon {width: 5px; height: 5px;}
+.simple-right-menu-icon-6 .simple-right-menu-item-icon {width: 6px; height: 6px;}
+.simple-right-menu-icon-7 .simple-right-menu-item-icon {width: 7px; height: 7px;}
+.simple-right-menu-icon-8 .simple-right-menu-item-icon {width: 8px; height: 8px;}
+.simple-right-menu-icon-9 .simple-right-menu-item-icon {width: 9px; height: 9px;}
+.simple-right-menu-icon-10 .simple-right-menu-item-icon {width: 10px; height: 10px;}
+.simple-right-menu-icon-11 .simple-right-menu-item-icon {width: 11px; height: 11px;}
+.simple-right-menu-icon-12 .simple-right-menu-item-icon {width: 12px; height: 12px;}
+.simple-right-menu-icon-13 .simple-right-menu-item-icon {width: 13px; height: 13px;}
+.simple-right-menu-icon-14 .simple-right-menu-item-icon {width: 14px; height: 14px;}
+.simple-right-menu-icon-15 .simple-right-menu-item-icon {width: 15px; height: 15px;}
+.simple-right-menu-icon-16 .simple-right-menu-item-icon {width: 16px; height: 16px;}
+.simple-right-menu-icon-17 .simple-right-menu-item-icon {width: 17px; height: 17px;}
+.simple-right-menu-icon-18 .simple-right-menu-item-icon {width: 18px; height: 18px;}
+.simple-right-menu-icon-19 .simple-right-menu-item-icon {width: 19px; height: 19px;}
+.simple-right-menu-icon-20 .simple-right-menu-item-icon {width: 20px; height: 20px;}
+.simple-right-menu-icon-21 .simple-right-menu-item-icon {width: 21px; height: 21px;}
+.simple-right-menu-icon-22 .simple-right-menu-item-icon {width: 22px; height: 22px;}
+.simple-right-menu-icon-23 .simple-right-menu-item-icon {width: 23px; height: 23px;}
+.simple-right-menu-icon-24 .simple-right-menu-item-icon {width: 24px; height: 24px;}
+.simple-right-menu-icon-25 .simple-right-menu-item-icon {width: 25px; height: 25px;}
+.simple-right-menu-icon-26 .simple-right-menu-item-icon {width: 26px; height: 26px;}
+.simple-right-menu-icon-27 .simple-right-menu-item-icon {width: 27px; height: 27px;}
+.simple-right-menu-icon-28 .simple-right-menu-item-icon {width: 28px; height: 28px;}
+.simple-right-menu-icon-29 .simple-right-menu-item-icon {width: 29px; height: 29px;}
+.simple-right-menu-icon-30 .simple-right-menu-item-icon {width: 30px; height: 30px;}
+.simple-right-menu-icon-31 .simple-right-menu-item-icon {width: 31px; height: 31px;}
+.simple-right-menu-icon-32 .simple-right-menu-item-icon {width: 32px; height: 32px;}
+.simple-right-menu-icon-33 .simple-right-menu-item-icon {width: 33px; height: 33px;}
+.simple-right-menu-icon-34 .simple-right-menu-item-icon {width: 34px; height: 34px;}
+.simple-right-menu-icon-35 .simple-right-menu-item-icon {width: 35px; height: 35px;}
+.simple-right-menu-icon-36 .simple-right-menu-item-icon {width: 36px; height: 36px;}
+.simple-right-menu-icon-37 .simple-right-menu-item-icon {width: 37px; height: 37px;}
+.simple-right-menu-icon-38 .simple-right-menu-item-icon {width: 38px; height: 38px;}
+.simple-right-menu-icon-39 .simple-right-menu-item-icon {width: 39px; height: 39px;}
+.simple-right-menu-icon-40 .simple-right-menu-item-icon {width: 40px; height: 40px;}
+.simple-right-menu-icon-41 .simple-right-menu-item-icon {width: 41px; height: 41px;}
+.simple-right-menu-icon-42 .simple-right-menu-item-icon {width: 42px; height: 42px;}
+.simple-right-menu-icon-43 .simple-right-menu-item-icon {width: 43px; height: 43px;}
+.simple-right-menu-icon-44 .simple-right-menu-item-icon {width: 44px; height: 44px;}
+.simple-right-menu-icon-45 .simple-right-menu-item-icon {width: 45px; height: 45px;}
+.simple-right-menu-icon-46 .simple-right-menu-item-icon {width: 46px; height: 46px;}
+.simple-right-menu-icon-47 .simple-right-menu-item-icon {width: 47px; height: 47px;}
+.simple-right-menu-icon-48 .simple-right-menu-item-icon {width: 48px; height: 48px;}
+.simple-right-menu-icon-49 .simple-right-menu-item-icon {width: 49px; height: 49px;}
+.simple-right-menu-icon-50 .simple-right-menu-item-icon {width: 50px; height: 50px;}
+.simple-right-menu-icon-51 .simple-right-menu-item-icon {width: 51px; height: 51px;}
+.simple-right-menu-icon-52 .simple-right-menu-item-icon {width: 52px; height: 52px;}
+.simple-right-menu-icon-53 .simple-right-menu-item-icon {width: 53px; height: 53px;}
+.simple-right-menu-icon-54 .simple-right-menu-item-icon {width: 54px; height: 54px;}
+.simple-right-menu-icon-55 .simple-right-menu-item-icon {width: 55px; height: 55px;}
+.simple-right-menu-icon-56 .simple-right-menu-item-icon {width: 56px; height: 56px;}
+.simple-right-menu-icon-57 .simple-right-menu-item-icon {width: 57px; height: 57px;}
+.simple-right-menu-icon-58 .simple-right-menu-item-icon {width: 58px; height: 58px;}
+.simple-right-menu-icon-59 .simple-right-menu-item-icon {width: 59px; height: 59px;}
+.simple-right-menu-icon-60 .simple-right-menu-item-icon {width: 60px; height: 60px;}
+.simple-right-menu-icon-61 .simple-right-menu-item-icon {width: 61px; height: 61px;}
+.simple-right-menu-icon-62 .simple-right-menu-item-icon {width: 62px; height: 62px;}
+.simple-right-menu-icon-63 .simple-right-menu-item-icon {width: 63px; height: 63px;}
+.simple-right-menu-icon-64 .simple-right-menu-item-icon {width: 64px; height: 64px;}
+.simple-right-menu-icon-65 .simple-right-menu-item-icon {width: 65px; height: 65px;}
+.simple-right-menu-icon-66 .simple-right-menu-item-icon {width: 66px; height: 66px;}
+.simple-right-menu-icon-67 .simple-right-menu-item-icon {width: 67px; height: 67px;}
+.simple-right-menu-icon-68 .simple-right-menu-item-icon {width: 68px; height: 68px;}
+.simple-right-menu-icon-69 .simple-right-menu-item-icon {width: 69px; height: 69px;}
+.simple-right-menu-icon-70 .simple-right-menu-item-icon {width: 70px; height: 70px;}
+.simple-right-menu-icon-71 .simple-right-menu-item-icon {width: 71px; height: 71px;}
+.simple-right-menu-icon-72 .simple-right-menu-item-icon {width: 72px; height: 72px;}
+.simple-right-menu-icon-73 .simple-right-menu-item-icon {width: 73px; height: 73px;}
+.simple-right-menu-icon-74 .simple-right-menu-item-icon {width: 74px; height: 74px;}
+.simple-right-menu-icon-75 .simple-right-menu-item-icon {width: 75px; height: 75px;}
+.simple-right-menu-icon-76 .simple-right-menu-item-icon {width: 76px; height: 76px;}
+.simple-right-menu-icon-77 .simple-right-menu-item-icon {width: 77px; height: 77px;}
+.simple-right-menu-icon-78 .simple-right-menu-item-icon {width: 78px; height: 78px;}
+.simple-right-menu-icon-79 .simple-right-menu-item-icon {width: 79px; height: 79px;}
+.simple-right-menu-icon-80 .simple-right-menu-item-icon {width: 80px; height: 80px;}
+.simple-right-menu-icon-81 .simple-right-menu-item-icon {width: 81px; height: 81px;}
+.simple-right-menu-icon-82 .simple-right-menu-item-icon {width: 82px; height: 82px;}
+.simple-right-menu-icon-83 .simple-right-menu-item-icon {width: 83px; height: 83px;}
+.simple-right-menu-icon-84 .simple-right-menu-item-icon {width: 84px; height: 84px;}
+.simple-right-menu-icon-85 .simple-right-menu-item-icon {width: 85px; height: 85px;}
+.simple-right-menu-icon-86 .simple-right-menu-item-icon {width: 86px; height: 86px;}
+.simple-right-menu-icon-87 .simple-right-menu-item-icon {width: 87px; height: 87px;}
+.simple-right-menu-icon-88 .simple-right-menu-item-icon {width: 88px; height: 88px;}
+.simple-right-menu-icon-89 .simple-right-menu-item-icon {width: 89px; height: 89px;}
+.simple-right-menu-icon-90 .simple-right-menu-item-icon {width: 90px; height: 90px;}
+.simple-right-menu-icon-91 .simple-right-menu-item-icon {width: 91px; height: 91px;}
+.simple-right-menu-icon-92 .simple-right-menu-item-icon {width: 92px; height: 92px;}
+.simple-right-menu-icon-93 .simple-right-menu-item-icon {width: 93px; height: 93px;}
+.simple-right-menu-icon-94 .simple-right-menu-item-icon {width: 94px; height: 94px;}
+.simple-right-menu-icon-95 .simple-right-menu-item-icon {width: 95px; height: 95px;}
+.simple-right-menu-icon-96 .simple-right-menu-item-icon {width: 96px; height: 96px;}
+.simple-right-menu-icon-97 .simple-right-menu-item-icon {width: 97px; height: 97px;}
+.simple-right-menu-icon-98 .simple-right-menu-item-icon {width: 98px; height: 98px;}
+.simple-right-menu-icon-99 .simple-right-menu-item-icon {width: 99px; height: 99px;}
+.simple-right-menu-icon-100 .simple-right-menu-item-icon {width: 100px; height: 100px;}

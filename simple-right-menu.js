@@ -8,13 +8,6 @@
 **/
 (function(window, console) {
 
-    var $doc = $(document),
-        globalObj = {};
-
-    $doc.bind("click", function(){
-        $(globalObj).trigger("close");
-    });
-
     var safeTextBuff = $("<div/>");
 
     function getEscapedText(text){
@@ -24,9 +17,9 @@
 
     function setLeaveState(){
         this._dropCloseTimeout();
-        if (this._opt['leaveInterval'] !== 0){
+        var timeInt = this._opt['leaveInterval'];
+        if (timeInt){
             var self = this;
-            var timeInt = this._opt['leaveInterval'] || 3000;
             var timeId = setTimeout(function(){
                 if (self._div){
                     //check for immedially destroy, before items are not hidden
@@ -50,10 +43,11 @@ function jqSimpleRightMenu(div, data, opt) {
         _init: function(div, data, opt) {
             var self = this;
             this._id = this._generateUniqueId();
-            this._div = $("<table class='simple-right-menu' id='"+ this._id +"'>").attr("unselectable", "on");
+            this._div = $("<table class='simple-right-menu' id='"+ this._id +"' tabIndex='-1'>").attr("unselectable", "on");
             this._contextDiv = div;
             this._objectEnv = {};
             this._opt = opt || {};
+            (!this._opt['leaveInterval']) && (this._opt['leaveInterval'] = 0);
             this._dropData();
             this.setData(data);
             this._bindEvents();
@@ -111,10 +105,14 @@ function jqSimpleRightMenu(div, data, opt) {
             }
         },
         setItemIconSize: function(size){
-            size = (typeof size == "string") ? size : size + "px";
-            (this._objectEnv['iconStyle']) ? this._objectEnv['iconStyle'].remove() : null;
-            this._objectEnv['iconStyle'] = $("<style> #"+ this._id +".simple-right-menu-item-icon {width: " + size + "; height: " + size + ";} </style>");
-            this._div.prepend(this._objectEnv['iconStyle']);
+            size = parseInt(size, 10);
+            if (!isNaN(size)){
+                var div = this._div;
+
+                div.addClass("simple-right-menu-icon-" + size);
+                div.removeClass("simple-right-menu-icon-" + this._div.data("iconSize"));
+                div.data("iconSize", size);
+            }
         },
         _onMenuClose: function(){
             var self = this;
@@ -405,14 +403,10 @@ function jqSimpleRightMenu(div, data, opt) {
                 self._dropCloseTimeout();
                 ev.stopPropagation();
                 ev.preventDefault();
+            })
+            .bind("blur", function(){
+                self._onMenuClose();
             });
-
-
-            $(globalObj).bind("close", {self: this}, this._onGlobalClose);
-        },
-        _onGlobalClose: function(ev){
-            var self = ev.data.self;
-            self.hide();
         },
         _onSelect: function(el, callEvent){
             var id = el.data("id"),
@@ -529,6 +523,7 @@ function jqSimpleRightMenu(div, data, opt) {
                 setLeaveState.call(this);
                 div.show();
                 self._fixPosition(wHeight, div, true);
+                div.focus();
             }
         },
         hide: function(){
@@ -566,7 +561,6 @@ function jqSimpleRightMenu(div, data, opt) {
             }
             this._nodesMap = undefined; this._data = undefined; this._objectEnv = undefined; this._div = undefined;
             $(this).unbind();
-            $(globalObj).unbind("close", this._onGlobalClose);
             this._opt = null;
         }
     };

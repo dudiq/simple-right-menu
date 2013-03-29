@@ -342,9 +342,12 @@ define(function (require) {
             _bindEvents: function(){
                 var self = this,
                     div = this._div;
-                $(this._contextDiv).unbind("contextmenu." + this._id).bind("contextmenu." + this._id, function(ev){
+
+                $(this._contextDiv).unbind("." + this._id).bind("contextmenu." + this._id, function(ev){
                     self.onContextMenu(ev);
                     return false;
+                }).bind("click." + this.id, function(){
+                    self._onMenuClose();
                 });
                 //bind events to root div. we don't need to bind events to every child
                 div.unbind("click dblclick contextmenu mouseover mouseenter mouseleave").bind("click", function(ev){

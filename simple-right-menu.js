@@ -11,6 +11,8 @@
 **/
 define(function (require) {
 
+    var $ = require("jquery");
+
     var safeTextBuff = $("<div/>");
 
     function getEscapedText(text){
@@ -411,7 +413,10 @@ define(function (require) {
                     ev.preventDefault();
                 })
                 .bind("blur", function(){
-                    self._onMenuClose();
+                    setTimeout(function(){
+                        //HACK for IE... =( i'm very sad to do this hacks...
+                        self._onMenuClose();
+                    }, 10);
                 });
             },
             _onSelect: function(el, callEvent){

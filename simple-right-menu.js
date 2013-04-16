@@ -351,16 +351,22 @@ define(function (require) {
                 }).bind("click." + this.id, function(){
                     self._onMenuClose();
                 });
-                //bind events to root div. we don't need to bind events to every child
-                div.unbind("click dblclick contextmenu mouseover mouseenter mouseleave").bind("click", function(ev){
+
+                function onClick(ev){
                     var el = self._getEventElem(ev),
                         parentEl = self._getParentItemElement(el);
                     if (parentEl.length != 0){
                         self._onSelect(parentEl);
                         $(rMenu).trigger(jqSimpleRightMenu.onClick, [parentEl.data("id")]);
                     }
-                    ev.stopPropagation();
-                }).bind("dblclick", function(ev){
+                }
+                var callClick = false,
+                    closeAfterClick = false;
+
+
+                //bind events to root div. we don't need to bind events to every child
+                div.unbind("dblclick contextmenu mouseover mouseenter mouseleave blur mousedown mouseup")
+                .bind("dblclick", function(ev){
                     var el = self._getEventElem(ev),
                         parentEl = self._getParentItemElement(el);
                         if (parentEl.length != 0){
@@ -412,11 +418,25 @@ define(function (require) {
                     ev.stopPropagation();
                     ev.preventDefault();
                 })
-                .bind("blur", function(){
-                    setTimeout(function(){
+                .bind("mouseup", function(ev){
+                    if (callClick){
+                        onClick(ev);
+                    }
+                    if (closeAfterClick){
                         //HACK for IE... =( i'm very sad to do this hacks...
                         self._onMenuClose();
-                    }, 10);
+                    }
+                })
+                .bind("mousedown", function(){
+                    callClick = true;
+                    closeAfterClick = false;
+                })
+                .bind("blur", function(){
+                    if (callClick){
+                        closeAfterClick = true;
+                    } else {
+                        self._onMenuClose();
+                    }
                 });
             },
             _onSelect: function(el, callEvent){

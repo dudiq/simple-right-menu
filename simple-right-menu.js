@@ -345,7 +345,12 @@ define(function (require) {
                 var self = this,
                     div = this._div;
 
+                var callClick = false,
+                    closeAfterClick = false;
+
                 $(this._contextDiv).unbind("." + this._id).bind("contextmenu." + this._id, function(ev){
+                    callClick = false;
+                    closeAfterClick = false;
                     self.onContextMenu(ev);
                     return false;
                 }).bind("click." + this.id, function(){
@@ -360,8 +365,6 @@ define(function (require) {
                         $(rMenu).trigger(jqSimpleRightMenu.onClick, [parentEl.data("id")]);
                     }
                 }
-                var callClick = false,
-                    closeAfterClick = false;
 
 
                 //bind events to root div. we don't need to bind events to every child
@@ -377,6 +380,7 @@ define(function (require) {
                     //drop context menu from menu items
                     ev.stopPropagation();
                     ev.preventDefault();
+
                 }).bind("mouseover", function(ev){
 
                     var el = self._getEventElem(ev),
@@ -568,7 +572,7 @@ define(function (require) {
                 return this._div;
             },
             _fixPosition: function(wHeight, el, root){
-                var h = el.height(),
+                var h = el.outerHeight(),
                     pos = el.offset().top,
                     cssTop = parseInt(el.css("top")),
                 newH = (wHeight < (h + pos)) ? wHeight - (h + pos) : 0;

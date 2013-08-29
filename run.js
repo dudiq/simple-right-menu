@@ -32,9 +32,10 @@ define(function (require) {
             {separator: true},
             {title: "test df asdf asf ad2"},
             {title: "node3"}
-        ]);
-        $(rMenu).bind(jqSimpleRightMenu.onBeforeShow, function () {
-            console.log("onBeforeShow");
+        ], {
+            onBeforeShow: function(){
+                console.log("onBeforeShow");
+            }
         });
 
         $("#menu").mousedown(function (ev) {

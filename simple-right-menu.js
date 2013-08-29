@@ -35,6 +35,16 @@ define(function (require) {
         }
     }
 
+    function trig(name){
+        var options = this._opt;
+        var res;
+        if (options[name] && typeof options[name] == "function"){
+            var args = Array.prototype.slice.call(arguments, 0);
+            args.splice(0, 1);//remove name argument
+            res = options[name].apply(this, args);
+        }
+        return res;
+    }
 
     function jqSimpleRightMenu(div, data, opt) {
         var rMenu = {
@@ -129,7 +139,7 @@ define(function (require) {
                             map[i].nodesContainer.hide();
                         }
                     }
-                    $(self).trigger(jqSimpleRightMenu.onClose);
+                    trig.call(self, "onClose");
                 });
             },
             _dropCloseTimeout: function(){
@@ -362,7 +372,7 @@ define(function (require) {
                         parentEl = self._getParentItemElement(el);
                     if (parentEl.length != 0){
                         self._onSelect(parentEl);
-                        $(rMenu).trigger(jqSimpleRightMenu.onClick, [parentEl.data("id")]);
+                        trig.call(self, "onClick", parentEl.data("id"));
                     }
                 }
 
@@ -373,7 +383,7 @@ define(function (require) {
                     var el = self._getEventElem(ev),
                         parentEl = self._getParentItemElement(el);
                         if (parentEl.length != 0){
-                            $(rMenu).trigger(jqSimpleRightMenu.onDblClick, [parentEl.data("id")]);
+                            trig.call(self, "onDblClick", parentEl.data("id"));
                         }
                     ev.stopPropagation();
                 }).bind("contextmenu", function(ev){
@@ -460,7 +470,7 @@ define(function (require) {
                 }
                 var selId = this._objectEnv["selectedNodeId"] = id;
                 if (callEvent !== false){
-                    $(rMenu).trigger(jqSimpleRightMenu.onSelect, [selId, oldSelId]);
+                    trig.call(this, "onSelect", selId, oldSelId);
                 }
             },
             selectNode: function(id, callEvent){
@@ -522,13 +532,11 @@ define(function (require) {
                 }
             },
             onContextMenu: function(ev){
-                var triggerEvent = new jQuery.Event(jqSimpleRightMenu.onBeforeShow),
-                    self = this;
-                $(this).trigger(triggerEvent, [ev]);
+                var res = trig.call(this, "onBeforeShow", ev);
                 if (ev && typeof ev == "object" && ev['clientX'] && ev['clientY']){
                     this._objectEnv['pos'] = {left: ev.clientX - 2, top:ev.clientY - 2};
                 }
-                if (!triggerEvent.isPropagationStopped()){
+                if (res !== false){
                     this.show();
                 }
             },
@@ -602,11 +610,6 @@ define(function (require) {
         rMenu._init(div, data, opt);
         return rMenu;
     }
-    jqSimpleRightMenu.onSelect = "E#jqSimpleRightMenu#onSelect";
-    jqSimpleRightMenu.onBeforeShow = "E#jqSimpleRightMenu#onBeforeShow";
-    jqSimpleRightMenu.onClose = "E#jqSimpleRightMenu#onClose";
-    jqSimpleRightMenu.onClick = "E#jqSimpleRightMenu#onClick";
-    jqSimpleRightMenu.onDblClick = "E#jqSimpleRightMenu#onDblClick";
 
     return jqSimpleRightMenu;
 });

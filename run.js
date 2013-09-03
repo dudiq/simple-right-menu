@@ -23,7 +23,7 @@ define(function (require) {
                 {title: "game", id: "game", func: function(){
                     console.log("game");
                 }},
-                {title: "test323"},
+                {title: "test323", bungClass: 'test'},
                 {title: "childs", nodes: [
                     {title: "1"},
                     {title: "2"}

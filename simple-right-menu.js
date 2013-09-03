@@ -159,8 +159,9 @@ define(function (require) {
                         canAdd = false;
                         return false;
                     } else {
+                        var isFolder = (node.nodes != undefined);
                         var isEnable = (node.enable === false) ? "simple-right-menu-item-disable " : "",
-                            isFolder = (node.nodes != undefined),
+                            bungClass = !isFolder ? node.bungClass : "",
                             hasChild = (isFolder && node.nodes.length > 0),
                             title = (node.safeTitle !== false) ? getEscapedText(node.title || "")  : (node.title || ""),
                             iconStyle = (node.icon) ? "simple-right-menu-icon-" + node.icon : "",
@@ -168,7 +169,7 @@ define(function (require) {
                                     $("<tr class='"+ isEnable +"simple-right-menu-item "+((isFolder) ? "simple-right-menu-folder" : "simple-right-menu-child") +"'>" +
                                     "<td>" + "<span class='simple-right-menu-item-icon "+ iconStyle +"'>&nbsp;</span>" + "</td>"+
                                     "<td><span class='simple-right-menu-title'>" + title + "</span></td>"+
-                                    "<td><span class='simple-right-menu-expand "+((hasChild) ? "simple-right-menu-has-child" : "" )+ "'>&nbsp;</span></td></tr>");
+                                    "<td><span class='simple-right-menu-expand "+ bungClass +" "+ ((hasChild) ? "simple-right-menu-has-child" : "" )+ "'>&nbsp;</span></td></tr>");
                         ul = (isFolder) ? self._getNewContainerEl(node.id) : undefined;
                         (ul) ? ul.hide() : null;
                         (node.visible === false) && (itemDiv.hide());

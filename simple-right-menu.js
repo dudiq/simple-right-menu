@@ -178,7 +178,7 @@ define(function (require) {
                         });
                         itemDiv.append($("<td>").append(ul));
                         node.userData = (node.userData == undefined) ? {} : node.userData;
-                        nodesMap[node.id] = {node: node, divs: itemDiv, nodesContainer: ul, parentId: pdiv.data("id")};
+                        nodesMap[node.id] = {node: node, divs: itemDiv, nodesContainer: ul, parentId: pdiv.data("id"), titleEl: itemDiv.find('.simple-right-menu-title')};
 
                         pdiv.append(itemDiv);
                     }
@@ -461,7 +461,7 @@ define(function (require) {
                     return;
                 }
                 if (typeof map.node.func == "function"){
-                    map.node.func();
+                    map.node.func.call(this, map.node);
                 }
                 var oldSelId = this._objectEnv["selectedNodeId"];
                 //this._div.find(".simple-right-menu-item-selected").removeClass("simple-right-menu-item-selected");
@@ -530,6 +530,14 @@ define(function (require) {
                 if (map) {
                     map["divs"].addClass("simple-right-menu-item-disable");
                     map["node"].enable = false;
+                }
+            },
+            setTitle: function(id, text){
+                var map = this._getNodesMap(id);
+                if (map) {
+                    var title = (map.node.safeTitle !== false) ? getEscapedText(text) : text;
+                    map.titleEl.html(title);
+                    map.node.title = text;
                 }
             },
             onContextMenu: function(ev){

@@ -20,8 +20,9 @@ define(function (require) {
         ]);
         var rMenu2 = new jqSimpleRightMenu($("#menu2"), [
             {title: "test", icon: "copy.png", nodes: [
-                {title: "game", id: "game", func: function(){
+                {title: "game", id: "game", func: function(node){
                     console.log("game");
+                    this.setTitle(node.id, "newGame");
                 }},
                 {title: "test323", bungClass: 'test'},
                 {title: "childs", nodes: [

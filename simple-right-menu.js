@@ -46,6 +46,17 @@ define(function (require) {
         return res;
     }
 
+    function hideAll(callEv){
+        this._div.stop().fadeOut(0).hide();
+        var map = this._nodesMap;
+        for (var i in map){
+            if (map[i].nodesContainer){
+                map[i].nodesContainer.hide();
+            }
+        }
+        (callEv !== false) && trig.call(this, "onClose");
+    }
+
     function jqSimpleRightMenu(div, data, opt) {
         var rMenu = {
             _data: null,
@@ -132,14 +143,7 @@ define(function (require) {
             _onMenuClose: function(){
                 var self = this;
                 this._div.fadeOut(100, function(){
-                    //close all open nodes
-                    var map = self._nodesMap;
-                    for (var i in map){
-                        if (map[i].nodesContainer){
-                            map[i].nodesContainer.hide();
-                        }
-                    }
-                    trig.call(self, "onClose");
+                    hideAll.call(self);
                 });
             },
             _dropCloseTimeout: function(){
@@ -541,6 +545,7 @@ define(function (require) {
                 }
             },
             onContextMenu: function(ev){
+                hideAll.call(this, false);
                 var res = trig.call(this, "onBeforeShow", ev);
                 if (ev && typeof ev == "object" && ev['clientX'] && ev['clientY']){
                     this._objectEnv['pos'] = {left: ev.clientX - 2, top:ev.clientY - 2};
@@ -563,19 +568,27 @@ define(function (require) {
                     }
                 }
 
-                div.detach();
+
+                div.detach().hide();
+
                 if (visNodes > 0){
                     //if no visible root nodes, drop showing right menu
+
                     $(document.body).append(div);
 
                     pos = pos || this._objectEnv['pos'];
                     pos = (pos == undefined) ? {left: 0, top: 0} : pos;
-                    div.css({left: pos.left - 2, top: pos.top - 2}).fadeIn(100);
+                    div.css({left: pos.left - 2, top: pos.top - 2, opacity: 0.00001});
 
                     setLeaveState.call(this);
                     div.show();
                     self._fixPosition(wHeight, div, true);
+
                     div.focus();
+                    div.animate({opacity: 1}, 100);
+
+                } else {
+                    hideAll.call(this, true);
                 }
             },
             hide: function(){

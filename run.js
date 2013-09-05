@@ -34,6 +34,9 @@ define(function (require) {
             {title: "test df asdf asf ad2"},
             {title: "node3"}
         ], {
+            onClose: function(){
+                console.log('onClose');
+            },
             onBeforeShow: function(){
                 console.log("onBeforeShow");
             }
@@ -51,12 +54,12 @@ define(function (require) {
             rMenu.addNode("game", {title: "new node0"}, 0);
         });
 
-        var str = ".simple-right-menu-icon-{{w}} .simple-right-menu-item-icon {width: {{w}}px; height: {{w}}px;}\n";
-        var tmp = "";
-        for (var i = 0; i <= 100; i++) {
-            tmp += str.split("{{w}}").join(i);
-        }
-        console.log(tmp);
+//        var str = ".simple-right-menu-icon-{{w}} .simple-right-menu-item-icon {width: {{w}}px; height: {{w}}px;}\n";
+//        var tmp = "";
+//        for (var i = 0; i <= 100; i++) {
+//            tmp += str.split("{{w}}").join(i);
+//        }
+//        console.log(tmp);
 
     });
 
